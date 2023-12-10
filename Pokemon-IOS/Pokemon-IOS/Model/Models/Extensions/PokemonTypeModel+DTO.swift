@@ -10,4 +10,3 @@ extension PokemonTypeModel {
         self.slot = dto.slot
     }
 }
-

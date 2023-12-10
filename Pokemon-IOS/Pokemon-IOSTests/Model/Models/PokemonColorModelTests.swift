@@ -48,4 +48,3 @@ final class PokemonColorModelTests: XCTestCase {
         XCTAssertEqual(sut.name, "blue")
     }
 }
-
