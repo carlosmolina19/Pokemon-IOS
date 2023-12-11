@@ -126,4 +126,32 @@ final class RemotePokemonRepositoryImplTests: XCTestCase {
         verify(mockNetworkProvider.fetch(from: url)).wasCalled()
         tasks.removeAll()
     }
+    
+    func test_fetch_when404ErrorISFound_errorShouldNotBeNil() throws {
+        let url = try XCTUnwrap(URL(string: "https://pokeapi.co/api/v2/pokemon/1/"))
+        
+        let expectation = XCTestExpectation(
+            description: "test_fetch_when404ErrorISFound_errorShouldNotBeNil")
+        let publisher = Fail<Data, Error>(error: NSError(domain: "test.domain",
+                                                         code: 404))
+            .eraseToAnyPublisher()
+        
+        given(mockNetworkProvider.fetch(from: url)).willReturn(publisher)
+        
+        sut.fetch(number: 1).sink {
+            switch $0 {
+            case .failure(let error):
+                XCTAssertEqual(PokemonError.notFound, error)
+            case .finished:
+                break
+            }
+            expectation.fulfill()
+        } receiveValue: { _ in
+            XCTFail("Bad Data was sent")
+        }.store(in: &tasks)
+        
+        wait(for: [expectation], timeout: 1.0)
+        verify(mockNetworkProvider.fetch(from: url)).wasCalled()
+        tasks.removeAll()
+    }
 }
