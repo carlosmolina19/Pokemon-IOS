@@ -32,11 +32,16 @@ final class RemotePokemonRepositoryImpl: RemotePokemonRepository {
             return dto
             
         }.mapError {
-            guard let error = $0 as? PokemonError
-            else {
+            switch $0 {
+            case let error as NSError where error.code == 404:
+                return PokemonError.notFound
+
+            case let pokemonError as PokemonError:
+                return pokemonError
+
+            default:
                 return PokemonError.genericError($0)
             }
-            return error
         }
         .eraseToAnyPublisher()
     }

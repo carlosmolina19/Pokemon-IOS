@@ -18,8 +18,21 @@ final class NetworkProviderImpl: NetworkProvider {
     func fetch(from url: URL) -> AnyPublisher<Data, Error> {
         return session.dataTaskPublisher(for: url)
             .retry(3)
+            .tryMap { output in
+                guard let httpResponse = output.response as? HTTPURLResponse else {
+                    throw URLError(.badServerResponse)
+                }
+
+                switch httpResponse.statusCode {
+                case 200...299:
+                    return output.data
+                case 404:
+                    throw NSError(domain: "pokemon.network", code: 404)
+                default:
+                    throw URLError(.badServerResponse)
+                }
+            }
             .mapError { $0 as Error }
-            .map(\.data)
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
