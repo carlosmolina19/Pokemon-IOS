@@ -25,7 +25,7 @@ final class PokemonItemViewModelImpl: PokemonItemViewModel {
     }
     
     var backgroundColor: Color {
-        Color(model.color?.name ?? "white")
+        Color.color(from: model.color?.name ?? "")
     }
 
     // MARK: - Private Properties
