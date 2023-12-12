@@ -58,6 +58,9 @@
 		BE32C3982B280D5C00EACA7E /* NSPersistentContainer+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3972B280D5C00EACA7E /* NSPersistentContainer+Mock.swift */; };
 		BE32C39B2B28159E00EACA7E /* PokemonType+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C39A2B28159E00EACA7E /* PokemonType+DTO.swift */; };
 		BE32C39D2B2815BA00EACA7E /* PokemonAbility+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C39C2B2815BA00EACA7E /* PokemonAbility+DTO.swift */; };
+		BE32C39F2B2821AD00EACA7E /* LocalPokemonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C39E2B2821AD00EACA7E /* LocalPokemonRepository.swift */; };
+		BE32C3A12B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3A02B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift */; };
+		BE32C3A32B282B2900EACA7E /* LocalPokemonRepositoryImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3A22B282B2900EACA7E /* LocalPokemonRepositoryImplTests.swift */; };
 		BE7C28902B22AD7600B55068 /* Pokemon_IOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C288F2B22AD7600B55068 /* Pokemon_IOSApp.swift */; };
 		BE7C28952B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE7C28932B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld */; };
 		BE7C28992B22AD7700B55068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7C28982B22AD7700B55068 /* Assets.xcassets */; };
@@ -133,6 +136,9 @@
 		BE32C3972B280D5C00EACA7E /* NSPersistentContainer+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Mock.swift"; sourceTree = "<group>"; };
 		BE32C39A2B28159E00EACA7E /* PokemonType+DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonType+DTO.swift"; sourceTree = "<group>"; };
 		BE32C39C2B2815BA00EACA7E /* PokemonAbility+DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonAbility+DTO.swift"; sourceTree = "<group>"; };
+		BE32C39E2B2821AD00EACA7E /* LocalPokemonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPokemonRepository.swift; sourceTree = "<group>"; };
+		BE32C3A02B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPokemonRepositoryImpl.swift; sourceTree = "<group>"; };
+		BE32C3A22B282B2900EACA7E /* LocalPokemonRepositoryImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPokemonRepositoryImplTests.swift; sourceTree = "<group>"; };
 		BE7C288C2B22AD7600B55068 /* Pokemon-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7C288F2B22AD7600B55068 /* Pokemon_IOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon_IOSApp.swift; sourceTree = "<group>"; };
 		BE7C28942B22AD7600B55068 /* Pokemon_IOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pokemon_IOS.xcdatamodel; sourceTree = "<group>"; };
@@ -231,6 +237,7 @@
 				BE32C33A2B25967800EACA7E /* Protocol */,
 				BE32C33D2B2596A300EACA7E /* RemotePokemonRepositoryImpl.swift */,
 				BE32C3452B25997800EACA7E /* RemotePokemonSpecieRepositoryImpl.swift */,
+				BE32C3A02B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -240,6 +247,7 @@
 			children = (
 				BE32C33B2B25969100EACA7E /* RemotePokemonRepository.swift */,
 				BE32C3432B25984D00EACA7E /* RemotePokemonSpecieRepository.swift */,
+				BE32C39E2B2821AD00EACA7E /* LocalPokemonRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -258,6 +266,7 @@
 			children = (
 				BE32C3482B259A8800EACA7E /* RemotePokemonRepositoryImplTests.swift */,
 				BE32C34A2B259AA300EACA7E /* RemotePokemonSpecieRepositoryImplTests.swift */,
+				BE32C3A22B282B2900EACA7E /* LocalPokemonRepositoryImplTests.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -695,10 +704,12 @@
 				BE32C35B2B267FA800EACA7E /* PokemonError+Equatable.swift in Sources */,
 				BE32C3562B266A3200EACA7E /* FetchPokemonPageUseCase.swift in Sources */,
 				BE32C33C2B25969100EACA7E /* RemotePokemonRepository.swift in Sources */,
+				BE32C3A12B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift in Sources */,
 				BE32C3662B269C4F00EACA7E /* PokemonItemViewModel.swift in Sources */,
 				BE32C36C2B26A1EC00EACA7E /* PokemonItemViewModelFactory.swift in Sources */,
 				BE32C37E2B26E24900EACA7E /* PokemonItemViewModelPreview.swift in Sources */,
 				BE32C3302B2585A500EACA7E /* PokemonColorModel+DTO.swift in Sources */,
+				BE32C39F2B2821AD00EACA7E /* LocalPokemonRepository.swift in Sources */,
 				BE32C39B2B28159E00EACA7E /* PokemonType+DTO.swift in Sources */,
 				BE32C3682B269E7900EACA7E /* PokemonItemViewModelImpl.swift in Sources */,
 				BEE31CB72B2545B400F53F48 /* PokemonAbilityModel.swift in Sources */,
@@ -747,6 +758,7 @@
 				BE32C3732B26ABC200EACA7E /* PokemonItemViewModelImplTests.swift in Sources */,
 				BE7C28C52B253F1800B55068 /* URLProtocolMock.swift in Sources */,
 				BE32C3542B25AB6100EACA7E /* FetchPokemonUseCaseImplTests.swift in Sources */,
+				BE32C3A32B282B2900EACA7E /* LocalPokemonRepositoryImplTests.swift in Sources */,
 				BE32C3492B259A8800EACA7E /* RemotePokemonRepositoryImplTests.swift in Sources */,
 				BE32C3212B255F6D00EACA7E /* PokemonResponseDtoTests.swift in Sources */,
 				BE32C35D2B26809A00EACA7E /* FetchPokemonPageUseCaseImplTests.swift in Sources */,

@@ -41,6 +41,7 @@ final class CoreDataProviderImpl: LocalProvider {
                 }
             }
         }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
     
@@ -60,6 +61,7 @@ final class CoreDataProviderImpl: LocalProvider {
                 }
             }
         }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 }

@@ -36,6 +36,7 @@ final class CoreDataProviderImplTests: XCTestCase {
         
         sut = nil
         mockPersistentContainer = nil
+        decoder = nil
         tasks = nil
     }
     
