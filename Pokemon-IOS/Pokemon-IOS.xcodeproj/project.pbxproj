@@ -50,8 +50,15 @@
 		BE32C37E2B26E24900EACA7E /* PokemonItemViewModelPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C37D2B26E24900EACA7E /* PokemonItemViewModelPreview.swift */; };
 		BE32C3802B26F45700EACA7E /* PokemonSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C37F2B26F45700EACA7E /* PokemonSceneBuilder.swift */; };
 		BE32C3842B27C96700EACA7E /* Color+PokemonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3832B27C96700EACA7E /* Color+PokemonColor.swift */; };
+		BE32C38F2B28047800EACA7E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3882B28047800EACA7E /* Persistence.swift */; };
+		BE32C3902B28047800EACA7E /* LocalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C38A2B28047800EACA7E /* LocalProvider.swift */; };
+		BE32C3912B28047800EACA7E /* CoreDataProviderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C38B2B28047800EACA7E /* CoreDataProviderImpl.swift */; };
+		BE32C3922B28047800EACA7E /* Pokemon+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C38D2B28047800EACA7E /* Pokemon+DTO.swift */; };
+		BE32C3952B280C6F00EACA7E /* CoreDataProviderImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3942B280C6F00EACA7E /* CoreDataProviderImplTests.swift */; };
+		BE32C3982B280D5C00EACA7E /* NSPersistentContainer+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C3972B280D5C00EACA7E /* NSPersistentContainer+Mock.swift */; };
+		BE32C39B2B28159E00EACA7E /* PokemonType+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C39A2B28159E00EACA7E /* PokemonType+DTO.swift */; };
+		BE32C39D2B2815BA00EACA7E /* PokemonAbility+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32C39C2B2815BA00EACA7E /* PokemonAbility+DTO.swift */; };
 		BE7C28902B22AD7600B55068 /* Pokemon_IOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C288F2B22AD7600B55068 /* Pokemon_IOSApp.swift */; };
-		BE7C28922B22AD7600B55068 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C28912B22AD7600B55068 /* Persistence.swift */; };
 		BE7C28952B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE7C28932B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld */; };
 		BE7C28992B22AD7700B55068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7C28982B22AD7700B55068 /* Assets.xcassets */; };
 		BE7C289D2B22AD7700B55068 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7C289C2B22AD7700B55068 /* Preview Assets.xcassets */; };
@@ -118,9 +125,16 @@
 		BE32C37D2B26E24900EACA7E /* PokemonItemViewModelPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonItemViewModelPreview.swift; sourceTree = "<group>"; };
 		BE32C37F2B26F45700EACA7E /* PokemonSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSceneBuilder.swift; sourceTree = "<group>"; };
 		BE32C3832B27C96700EACA7E /* Color+PokemonColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+PokemonColor.swift"; sourceTree = "<group>"; };
+		BE32C3882B28047800EACA7E /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		BE32C38A2B28047800EACA7E /* LocalProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalProvider.swift; sourceTree = "<group>"; };
+		BE32C38B2B28047800EACA7E /* CoreDataProviderImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataProviderImpl.swift; sourceTree = "<group>"; };
+		BE32C38D2B28047800EACA7E /* Pokemon+DTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pokemon+DTO.swift"; sourceTree = "<group>"; };
+		BE32C3942B280C6F00EACA7E /* CoreDataProviderImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProviderImplTests.swift; sourceTree = "<group>"; };
+		BE32C3972B280D5C00EACA7E /* NSPersistentContainer+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Mock.swift"; sourceTree = "<group>"; };
+		BE32C39A2B28159E00EACA7E /* PokemonType+DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonType+DTO.swift"; sourceTree = "<group>"; };
+		BE32C39C2B2815BA00EACA7E /* PokemonAbility+DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonAbility+DTO.swift"; sourceTree = "<group>"; };
 		BE7C288C2B22AD7600B55068 /* Pokemon-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7C288F2B22AD7600B55068 /* Pokemon_IOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon_IOSApp.swift; sourceTree = "<group>"; };
-		BE7C28912B22AD7600B55068 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BE7C28942B22AD7600B55068 /* Pokemon_IOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pokemon_IOS.xcdatamodel; sourceTree = "<group>"; };
 		BE7C28982B22AD7700B55068 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE7C289A2B22AD7700B55068 /* Pokemon_IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pokemon_IOS.entitlements; sourceTree = "<group>"; };
@@ -367,6 +381,60 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		BE32C3852B28047800EACA7E /* Data Persistence  */ = {
+			isa = PBXGroup;
+			children = (
+				BE7C28932B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld */,
+				BE32C3882B28047800EACA7E /* Persistence.swift */,
+				BE32C3892B28047800EACA7E /* Protocol */,
+				BE32C38B2B28047800EACA7E /* CoreDataProviderImpl.swift */,
+				BE32C38C2B28047800EACA7E /* Entities */,
+			);
+			path = "Data Persistence ";
+			sourceTree = "<group>";
+		};
+		BE32C3892B28047800EACA7E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				BE32C38A2B28047800EACA7E /* LocalProvider.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		BE32C38C2B28047800EACA7E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BE32C3992B28144300EACA7E /* Extensions */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		BE32C3932B280C3400EACA7E /* Data Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				BE32C3942B280C6F00EACA7E /* CoreDataProviderImplTests.swift */,
+			);
+			path = "Data Persistence";
+			sourceTree = "<group>";
+		};
+		BE32C3962B280D3A00EACA7E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BE32C3972B280D5C00EACA7E /* NSPersistentContainer+Mock.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BE32C3992B28144300EACA7E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BE32C38D2B28047800EACA7E /* Pokemon+DTO.swift */,
+				BE32C39A2B28159E00EACA7E /* PokemonType+DTO.swift */,
+				BE32C39C2B2815BA00EACA7E /* PokemonAbility+DTO.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BE7C28832B22AD7600B55068 = {
 			isa = PBXGroup;
 			children = (
@@ -389,16 +457,15 @@
 		BE7C288E2B22AD7600B55068 /* Pokemon-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				BE32C3852B28047800EACA7E /* Data Persistence  */,
 				BE32C3742B26D79500EACA7E /* View */,
 				BE32C35E2B269B1000EACA7E /* ViewModel */,
 				BE32C34C2B25A37300EACA7E /* UseCases */,
 				BEC36F2B2B2542FB00FDA763 /* Model */,
 				BE7C28B62B253DA800B55068 /* Networking */,
 				BE7C288F2B22AD7600B55068 /* Pokemon_IOSApp.swift */,
-				BE7C28912B22AD7600B55068 /* Persistence.swift */,
 				BE7C28982B22AD7700B55068 /* Assets.xcassets */,
 				BE7C289A2B22AD7700B55068 /* Pokemon_IOS.entitlements */,
-				BE7C28932B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld */,
 				BE7C289B2B22AD7700B55068 /* Preview Content */,
 			);
 			path = "Pokemon-IOS";
@@ -415,6 +482,7 @@
 		BE7C28A82B25372900B55068 /* Pokemon-IOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				BE32C3932B280C3400EACA7E /* Data Persistence */,
 				BE32C36F2B26AB7C00EACA7E /* ViewModel */,
 				BE32C3522B25AB4600EACA7E /* UseCases */,
 				BE32C31D2B255F1500EACA7E /* Model */,
@@ -453,6 +521,7 @@
 		BE7C28C12B253F1800B55068 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				BE32C3962B280D3A00EACA7E /* Extensions */,
 				BE7C28C22B253F1800B55068 /* URLProtocolMock.swift */,
 			);
 			path = Mocks;
@@ -630,8 +699,10 @@
 				BE32C36C2B26A1EC00EACA7E /* PokemonItemViewModelFactory.swift in Sources */,
 				BE32C37E2B26E24900EACA7E /* PokemonItemViewModelPreview.swift in Sources */,
 				BE32C3302B2585A500EACA7E /* PokemonColorModel+DTO.swift in Sources */,
+				BE32C39B2B28159E00EACA7E /* PokemonType+DTO.swift in Sources */,
 				BE32C3682B269E7900EACA7E /* PokemonItemViewModelImpl.swift in Sources */,
 				BEE31CB72B2545B400F53F48 /* PokemonAbilityModel.swift in Sources */,
+				BE32C3902B28047800EACA7E /* LocalProvider.swift in Sources */,
 				BE32C34F2B25A4D600EACA7E /* FetchPokemonDetailUseCase.swift in Sources */,
 				BE32C3582B266A5300EACA7E /* FetchPokemonPageUseCaseImpl.swift in Sources */,
 				BE32C3462B25997800EACA7E /* RemotePokemonSpecieRepositoryImpl.swift in Sources */,
@@ -641,17 +712,20 @@
 				BE7C28902B22AD7600B55068 /* Pokemon_IOSApp.swift in Sources */,
 				BE32C33E2B2596A300EACA7E /* RemotePokemonRepositoryImpl.swift in Sources */,
 				BE32C3242B25673600EACA7E /* PokemonSpeciesResponseDto.swift in Sources */,
+				BE32C3912B28047800EACA7E /* CoreDataProviderImpl.swift in Sources */,
 				BEE31CB92B25472100F53F48 /* PokemonColorModel.swift in Sources */,
-				BE7C28922B22AD7600B55068 /* Persistence.swift in Sources */,
 				BE32C3842B27C96700EACA7E /* Color+PokemonColor.swift in Sources */,
+				BE32C39D2B2815BA00EACA7E /* PokemonAbility+DTO.swift in Sources */,
 				BE32C3422B25972100EACA7E /* PokemonError.swift in Sources */,
 				BE32C37A2B26DC8D00EACA7E /* PokemonItemView.swift in Sources */,
 				BE32C3192B2553B600EACA7E /* PokemonResponseDto.swift in Sources */,
+				BE32C3922B28047800EACA7E /* Pokemon+DTO.swift in Sources */,
 				BEE31CB22B2544F300F53F48 /* PokemonModel.swift in Sources */,
 				BE7C28952B22AD7600B55068 /* Pokemon_IOS.xcdatamodeld in Sources */,
 				BE7C28C02B253E5A00B55068 /* NetworkProvider.swift in Sources */,
 				BE32C32A2B25857400EACA7E /* PokemonModel+DTO.swift in Sources */,
 				BEE31CB42B25458800F53F48 /* PokemonTypeModel.swift in Sources */,
+				BE32C38F2B28047800EACA7E /* Persistence.swift in Sources */,
 				BE32C3802B26F45700EACA7E /* PokemonSceneBuilder.swift in Sources */,
 				BE32C3512B25A53100EACA7E /* FetchPokemonDetailUseCaseImpl.swift in Sources */,
 				BE32C32E2B25859400EACA7E /* PokenAbilityModel+DTO.swift in Sources */,
@@ -669,6 +743,7 @@
 				BE32C3322B258B7A00EACA7E /* PokemonModelTests.swift in Sources */,
 				BE32C3282B25693100EACA7E /* PokemonSpeciesResponseDtoTests.swift in Sources */,
 				BE32C3382B258BB200EACA7E /* PokemonTypeModelTests.swift in Sources */,
+				BE32C3982B280D5C00EACA7E /* NSPersistentContainer+Mock.swift in Sources */,
 				BE32C3732B26ABC200EACA7E /* PokemonItemViewModelImplTests.swift in Sources */,
 				BE7C28C52B253F1800B55068 /* URLProtocolMock.swift in Sources */,
 				BE32C3542B25AB6100EACA7E /* FetchPokemonUseCaseImplTests.swift in Sources */,
@@ -677,6 +752,7 @@
 				BE32C35D2B26809A00EACA7E /* FetchPokemonPageUseCaseImplTests.swift in Sources */,
 				BE32C3342B258B8900EACA7E /* PokenAbilityModelTests.swift in Sources */,
 				BE7C28BC2B253E4700B55068 /* NetworkProviderImplTests.swift in Sources */,
+				BE32C3952B280C6F00EACA7E /* CoreDataProviderImplTests.swift in Sources */,
 				BE32C3362B258B9900EACA7E /* PokemonColorModelTests.swift in Sources */,
 				1F2D25CBEB1DC8B35BEDBEDD /* Pokemon_IOSTests-Pokemon_IOSMocks.generated.swift in Sources */,
 			);
