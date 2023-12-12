@@ -50,7 +50,7 @@ final class PokemonItemViewModelImplTests: XCTestCase {
         XCTAssertEqual(sut.number, "#0001")
         XCTAssertEqual(sut.abilities.first, "overgrow")
         XCTAssertEqual(sut.types.first, "grass")
-        XCTAssertEqual(sut.backgroundColor, Color("blue"))
+        XCTAssertEqual(sut.backgroundColor, .blue)
         XCTAssertEqual(pokemonModel.url, sut.url)
     }
 }
