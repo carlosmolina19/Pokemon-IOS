@@ -29,8 +29,13 @@ struct PokemonListView<T: PokemonListViewModel>: View {
                    
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
-                            ForEach(viewModel.items, id: \.number) {
-                                PokemonItemView(viewModel: $0)
+                            ForEach(viewModel.items.indices, id: \.self) { index in
+                                PokemonItemView(viewModel: viewModel.items[index])
+                                    .onAppear {
+                                        if index == viewModel.items.count - 5 {
+                                            viewModel.loadItems()
+                                        }
+                                    }
                             }
                         }
                     }
