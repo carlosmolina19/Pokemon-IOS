@@ -55,13 +55,12 @@ final class CoreDataProviderImplTests: XCTestCase {
         let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
                                                           from: speciesAsset.data)
         
+        let pokemonModel = PokemonModel(dto: pokemonResponseDto, speciesDto: pokemonSpecieResponseDto)
         
+        let pokemonEntity = Pokemon(model: pokemonModel, context: sut.context)
         let expectation = expectation(description: "test_fetch_shouldBeFulFill")
-        let pokemonEntity = Pokemon(pokemonResponseDto: pokemonResponseDto,
-                                    pokemonSpeciesDto: pokemonSpecieResponseDto,
-                                    context: sut.context)
-        
         let predicate = NSPredicate(format: "id == %@", String(pokemonEntity.id))
+        
         sut.fetch(entityType: Pokemon.self, predicate: predicate)
             .sink { _ in
             } receiveValue: { _ in

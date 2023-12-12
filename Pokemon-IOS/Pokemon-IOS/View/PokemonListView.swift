@@ -9,15 +9,15 @@ struct PokemonListView<T: PokemonListViewModel>: View {
         GridItem(.flexible(minimum: 180), spacing: 16),
         GridItem(.flexible(minimum: 180))
     ]
-
+    
     // MARK: - Initialization
-
+    
     init(viewModel: T) {
         self.viewModel = viewModel
     }
     
     // MARK: - Body
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -26,7 +26,7 @@ struct PokemonListView<T: PokemonListViewModel>: View {
                         .font(.headline)
                         .foregroundColor(.secondary)
                         .padding(.top, 16)
-                   
+                    
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.items.indices, id: \.self) { index in
@@ -49,8 +49,8 @@ struct PokemonListView<T: PokemonListViewModel>: View {
             viewModel.loadItems()
         })
     }
-
-
+    
+    
 }
 
 // MARK: - Preview
