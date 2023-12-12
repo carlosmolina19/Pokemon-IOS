@@ -5,6 +5,10 @@ extension Color {
         switch string.lowercased() {
         case "red":
             return .red
+        case "pink":
+            return .pink
+        case "black":
+            return .black
         case "brown":
             return .brown
         case "purple":
