@@ -6,20 +6,20 @@ import XCTest
 
 @testable import Pokemon_IOS
 
-final class LocalPokemonRepositoryImplTests: XCTestCase {
+final class SavePokemonDetailUseCaseImplTests: XCTestCase {
     
     // MARK: - Private Typealias
     
-    private typealias SUT = LocalPokemonRepositoryImpl
+    private typealias SUT = SavePokemonDetailUseCaseImpl
     
     // MARK: - Private Properties
     
     private var sut: SUT!
-    private var mockLocalProvider: LocalProviderMock!
+    private var decoder: JSONDecoder!
+    private var mockLocalPokemonRepository: LocalPokemonRepositoryMock!
     private var mockPersistentContainer: NSPersistentContainer!
     private var tasks: Set<AnyCancellable>!
-    private var decoder: JSONDecoder!
-
+    
     // MARK: - Lifecycle
     
     override func setUp() {
@@ -28,17 +28,16 @@ final class LocalPokemonRepositoryImplTests: XCTestCase {
         tasks = .init()
         decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        mockLocalProvider = mock(LocalProvider.self)
-        sut = SUT(localProvider: mockLocalProvider)
+        mockLocalPokemonRepository = mock(LocalPokemonRepository.self)
         mockPersistentContainer = NSPersistentContainer.mockPersistentContainer()
-        given(mockLocalProvider.context).willReturn(mockPersistentContainer.viewContext)
+        sut = SUT(localPokemonRepository: mockLocalPokemonRepository)
     }
     
     override func tearDown() {
         super.tearDown()
         
         sut = nil
-        mockLocalProvider = nil
+        mockLocalPokemonRepository = nil
         mockPersistentContainer = nil
         tasks = nil
         decoder = nil
@@ -46,78 +45,79 @@ final class LocalPokemonRepositoryImplTests: XCTestCase {
     
     // MARK: - Tests
     
-    func test_fetch_shouldReturnValues() throws {
-        let predicate = NSPredicate(format: "id == %@", "1")
+    func test_execute_shouldCallToRepository() throws {
         let asset = try XCTUnwrap(NSDataAsset(name: "PokemonResponse"))
         let speciesAsset = try XCTUnwrap(NSDataAsset(name: "PokemonSpeciesResponse"))
         let pokemonResponseDto = try decoder.decode(PokemonResponseDto.self,
                                                     from: asset.data)
-        
         let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
                                                           from: speciesAsset.data)
         
-        let pokemonModel = PokemonModel(dto: pokemonResponseDto, speciesDto: pokemonSpecieResponseDto)
-        let pokemonEntity = Pokemon(model: pokemonModel, context: mockLocalProvider.context)
+        let pokemonModel = PokemonModel(dto: pokemonResponseDto,
+                                       speciesDto: pokemonSpecieResponseDto)
+        
+        let pokemonEntity = Pokemon(model: pokemonModel,
+                context: mockPersistentContainer.viewContext)
+        
+        let publisher = Just(pokemonEntity)
+            .setFailureType(to: PokemonError.self)
+            .eraseToAnyPublisher()
+
         
         let expectation = XCTestExpectation(
-            description: "test_fetch_shouldReturnValues")
+            description: "test_execute_shouldCallToRepository")
         
-        let publisher = Just([pokemonEntity])
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
         
-        given(mockLocalProvider.fetch(entityType: Pokemon.self, predicate: predicate)).willReturn(publisher)
+        given(mockLocalPokemonRepository.save(from: any())).willReturn(publisher)
         
-        sut.fetch(number: 1).sink {
+        sut.execute(model: pokemonModel).sink {
             switch $0 {
             case .failure(let error):
-                XCTFail("Error: \(error.localizedDescription)")
-            case .finished:
-                break
-            }
-            expectation.fulfill()
-        } receiveValue: {_ in
-        }.store(in: &tasks)
-        
-        wait(for: [expectation], timeout: 1.0)
-        verify(mockLocalProvider.fetch(entityType: Pokemon.self, predicate: predicate)).wasCalled()
-        tasks.removeAll()
-    }
-    
-    
-    func test_save_shouldBeCalled() throws {
-        let asset = try XCTUnwrap(NSDataAsset(name: "PokemonResponse"))
-        let speciesAsset = try XCTUnwrap(NSDataAsset(name: "PokemonSpeciesResponse"))
-        let pokemonResponseDto = try decoder.decode(PokemonResponseDto.self,
-                                                    from: asset.data)
-        
-        let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
-                                                          from: speciesAsset.data)
-        
-        let pokemonModel = PokemonModel(dto: pokemonResponseDto, speciesDto: pokemonSpecieResponseDto)
-        let pokemonEntity = Pokemon(model: pokemonModel, context: mockLocalProvider.context)
-        let expectation = XCTestExpectation(
-            description: "test_save_shouldBeCalled")
-        let publisher = Just(())
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-        
-        given(mockLocalProvider.save()).willReturn(publisher)
-        
-        sut.save(from: pokemonModel).sink {
-            switch $0 {
-            case .failure(let error):
-                XCTFail("Error: \(error.localizedDescription)")
+                XCTFail("Error wasn't sent: \(error.localizedDescription)")
             case .finished:
                 break
             }
             expectation.fulfill()
         } receiveValue: {
-            XCTAssertEqual(pokemonEntity.id, $0.id)
+            XCTAssertEqual($0.name, pokemonEntity.name)
         }.store(in: &tasks)
         
         wait(for: [expectation], timeout: 1.0)
-        verify(mockLocalProvider.save()).wasCalled()
+        verify(mockLocalPokemonRepository.save(from: any())).wasCalled()
+        tasks.removeAll()
+    }
+    
+    func test_execute_whenLocalPokemonRepositoryReturnError_shouldBeFulFill() throws {
+        let asset = try XCTUnwrap(NSDataAsset(name: "PokemonResponse"))
+        let speciesAsset = try XCTUnwrap(NSDataAsset(name: "PokemonSpeciesResponse"))
+        let pokemonResponseDto = try decoder.decode(PokemonResponseDto.self,
+                                                    from: asset.data)
+        let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
+                                                          from: speciesAsset.data)
+        
+        let pokemonModel = PokemonModel(dto: pokemonResponseDto,
+                                       speciesDto: pokemonSpecieResponseDto)
+        let expectation = XCTestExpectation(
+            description: "test_execute_whenLocalPokemonRepositoryReturnError_shouldNotCallToRemoteSpecieRepository")
+        
+        let errorPublisher = Fail<Pokemon, PokemonError>(error:PokemonError.invalidFormat).eraseToAnyPublisher()
+        
+        
+        given(mockLocalPokemonRepository.save(from: any())).willReturn(errorPublisher)
+        
+        sut.execute(model: pokemonModel).sink {
+            switch $0 {
+            case .failure(let error):
+                XCTAssertEqual(error, .invalidFormat)
+            case .finished:
+                break
+            }
+            expectation.fulfill()
+        } receiveValue: { _ in
+        }.store(in: &tasks)
+        
+        wait(for: [expectation], timeout: 1.0)
+        verify(mockLocalPokemonRepository.save(from: any())).wasCalled()
         tasks.removeAll()
     }
 }

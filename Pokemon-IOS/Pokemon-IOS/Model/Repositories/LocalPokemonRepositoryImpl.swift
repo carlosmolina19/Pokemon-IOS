@@ -16,8 +16,8 @@ final class LocalPokemonRepositoryImpl: LocalPokemonRepository {
     
     // MARK: - Internal Methods
     
-    func fetch(pokemonId: Int) -> AnyPublisher<Pokemon, PokemonError> {
-        let predicate = NSPredicate(format: "id == %@", String(pokemonId))
+    func fetch(number: Int) -> AnyPublisher<Pokemon, PokemonError> {
+        let predicate = NSPredicate(format: "id == %@", String(number))
         return localProvider.fetch(entityType: Pokemon.self, predicate: predicate)
             .tryMap { results in
                 guard let firstPokemon = results.first else {
@@ -31,17 +31,15 @@ final class LocalPokemonRepositoryImpl: LocalPokemonRepository {
             .eraseToAnyPublisher()
     }
     
-    func save(from pokemonResponseDto: PokemonResponseDto,
-              pokemonSpeciesResponseDto: PokemonSpeciesResponseDto?) -> AnyPublisher<Void, PokemonError> {
-        return Future<Void, PokemonError> {[weak self] promise in
+    func save(from model: PokemonModel) -> AnyPublisher<Pokemon, PokemonError> {
+        return Future<Pokemon, PokemonError> {[weak self] promise in
             guard let self
             else {
                 promise(.failure(PokemonError.deallocated))
                 return
             }
             self.localProvider.context.perform {
-                let _ = Pokemon(pokemonResponseDto: pokemonResponseDto,
-                                pokemonSpeciesDto: pokemonSpeciesResponseDto,
+                let pokemonEntity = Pokemon(model: model,
                                 context: self.localProvider.context)
                 
                 self.localProvider.save()
@@ -53,7 +51,7 @@ final class LocalPokemonRepositoryImpl: LocalPokemonRepository {
                             break
                         }
                     }, receiveValue: {
-                        promise(.success(()))
+                        promise(.success(pokemonEntity))
                     })
                     .store(in: &self.cancellables)
             }

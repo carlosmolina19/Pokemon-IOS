@@ -6,7 +6,7 @@ struct Pokemon_IOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            PokemonSceneBuilder().build()
+            PokemonSceneBuilder().build(persistentContainer: persistence.persistentContainer)
         }
     }
 }

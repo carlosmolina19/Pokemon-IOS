@@ -24,7 +24,7 @@ struct PokemonItemView: View {
                     .padding(.bottom, 16)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
-                        
+                
                 VStack(alignment: .leading) {
                     ForEach(viewModel.types, id: \.self) { type in
                         Text(type)
@@ -46,7 +46,7 @@ struct PokemonItemView: View {
                     .padding(.trailing, 8)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
-
+                
                 ZStack(alignment: .bottom) {
                     Image("pokeBallBackground")
                         .resizable()

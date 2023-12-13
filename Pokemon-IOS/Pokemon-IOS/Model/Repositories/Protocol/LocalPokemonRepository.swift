@@ -3,7 +3,6 @@ import Foundation
 
 protocol LocalPokemonRepository {
 
-    func fetch(pokemonId: Int) -> AnyPublisher<Pokemon, PokemonError>
-    func save(from pokemonResponseDto: PokemonResponseDto,
-              pokemonSpeciesResponseDto: PokemonSpeciesResponseDto?) -> AnyPublisher<Void, PokemonError>
+    func fetch(number: Int) -> AnyPublisher<Pokemon, PokemonError>
+    func save(from model: PokemonModel) -> AnyPublisher<Pokemon, PokemonError>
 }
