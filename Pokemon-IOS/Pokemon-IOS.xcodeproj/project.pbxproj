@@ -75,6 +75,9 @@
 		BE7C28C02B253E5A00B55068 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C28BF2B253E5A00B55068 /* NetworkProvider.swift */; };
 		BE7C28C52B253F1800B55068 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C28C22B253F1800B55068 /* URLProtocolMock.swift */; };
 		BEE082EC2B29213900BC8BCC /* SavePokemonDetailUseCaseImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE082EB2B29213900BC8BCC /* SavePokemonDetailUseCaseImplTests.swift */; };
+		BEE082F22B29A8DD00BC8BCC /* FilterPokemonListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE082F12B29A8DD00BC8BCC /* FilterPokemonListUseCase.swift */; };
+		BEE082F42B29A90800BC8BCC /* FilterPokemonListUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE082F32B29A90800BC8BCC /* FilterPokemonListUseCaseImpl.swift */; };
+		BEE082F72B29B63800BC8BCC /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = BEE082F62B29B63800BC8BCC /* NukeUI */; };
 		BEE31CB22B2544F300F53F48 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE31CB12B2544F300F53F48 /* PokemonModel.swift */; };
 		BEE31CB42B25458800F53F48 /* PokemonTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE31CB32B25458800F53F48 /* PokemonTypeModel.swift */; };
 		BEE31CB72B2545B400F53F48 /* PokemonAbilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE31CB62B2545B400F53F48 /* PokemonAbilityModel.swift */; };
@@ -164,6 +167,8 @@
 		BE7C28BF2B253E5A00B55068 /* NetworkProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		BE7C28C22B253F1800B55068 /* URLProtocolMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		BEE082EB2B29213900BC8BCC /* SavePokemonDetailUseCaseImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePokemonDetailUseCaseImplTests.swift; sourceTree = "<group>"; };
+		BEE082F12B29A8DD00BC8BCC /* FilterPokemonListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPokemonListUseCase.swift; sourceTree = "<group>"; };
+		BEE082F32B29A90800BC8BCC /* FilterPokemonListUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPokemonListUseCaseImpl.swift; sourceTree = "<group>"; };
 		BEE31CB12B2544F300F53F48 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		BEE31CB32B25458800F53F48 /* PokemonTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeModel.swift; sourceTree = "<group>"; };
 		BEE31CB62B2545B400F53F48 /* PokemonAbilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAbilityModel.swift; sourceTree = "<group>"; };
@@ -176,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE082F72B29B63800BC8BCC /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +299,7 @@
 				BE32C3572B266A5300EACA7E /* FetchPokemonPageUseCaseImpl.swift */,
 				BE32C34D2B25A38D00EACA7E /* Protocol */,
 				BE32C3B22B284AFA00EACA7E /* SavePokemonDetailUseCaseImpl.swift */,
+				BEE082F32B29A90800BC8BCC /* FilterPokemonListUseCaseImpl.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -302,6 +309,7 @@
 			children = (
 				BE32C3B42B284C2A00EACA7E /* FetchLocalPokemonDetailUseCase.swift */,
 				BE32C34E2B25A4D600EACA7E /* FetchPokemonDetailUseCase.swift */,
+				BEE082F12B29A8DD00BC8BCC /* FilterPokemonListUseCase.swift */,
 				BE32C3552B266A3200EACA7E /* FetchPokemonPageUseCase.swift */,
 				BE32C3B02B284AB900EACA7E /* SavePokemonDetailUseCase.swift */,
 			);
@@ -607,6 +615,9 @@
 			dependencies = (
 			);
 			name = "Pokemon-IOS";
+			packageProductDependencies = (
+				BEE082F62B29B63800BC8BCC /* NukeUI */,
+			);
 			productName = "Pokemon-IOS";
 			productReference = BE7C288C2B22AD7600B55068 /* Pokemon-IOS.app */;
 			productType = "com.apple.product-type.application";
@@ -663,6 +674,7 @@
 			mainGroup = BE7C28832B22AD7600B55068;
 			packageReferences = (
 				BE62BE342B28FE260091AAE1 /* XCRemoteSwiftPackageReference "mockingbird" */,
+				BEE082F52B29B63800BC8BCC /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = BE7C288D2B22AD7600B55068 /* Products */;
 			projectDirPath = "";
@@ -719,6 +731,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE082F42B29A90800BC8BCC /* FilterPokemonListUseCaseImpl.swift in Sources */,
 				BE32C3782B26DB9900EACA7E /* PokemonListView.swift in Sources */,
 				BE32C3642B269B9100EACA7E /* PokemonListViewModelImpl.swift in Sources */,
 				BE7C28BE2B253E5200B55068 /* NetworkProviderImpl.swift in Sources */,
@@ -728,6 +741,7 @@
 				BE32C33C2B25969100EACA7E /* RemotePokemonRepository.swift in Sources */,
 				BE32C3A12B2822D400EACA7E /* LocalPokemonRepositoryImpl.swift in Sources */,
 				BE32C3662B269C4F00EACA7E /* PokemonItemViewModel.swift in Sources */,
+				BEE082F22B29A8DD00BC8BCC /* FilterPokemonListUseCase.swift in Sources */,
 				BE32C3A92B28355A00EACA7E /* PokemonModel+NSManagedObject.swift in Sources */,
 				BE32C36C2B26A1EC00EACA7E /* PokemonItemViewModelFactory.swift in Sources */,
 				BE32C37E2B26E24900EACA7E /* PokemonItemViewModelPreview.swift in Sources */,
@@ -1093,6 +1107,14 @@
 				minimumVersion = 0.20.0;
 			};
 		};
+		BEE082F52B29B63800BC8BCC /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 12.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1100,6 +1122,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE62BE342B28FE260091AAE1 /* XCRemoteSwiftPackageReference "mockingbird" */;
 			productName = Mockingbird;
+		};
+		BEE082F62B29B63800BC8BCC /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEE082F52B29B63800BC8BCC /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

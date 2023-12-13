@@ -33,8 +33,10 @@ final class PokemonSceneBuilder {
                                                                   fetchLocalPokemonDetailUseCase: fetchLocalPokemonUseCase,
                                                                   savePokemonDetailUseCase: savePokemonUseCase)
         
+        let filterPokemonListUseCase = FilterPokemonListUseCaseImpl()
         let pokemonItemViewModelFactory = PokemonItemViewModelFactoryImpl()
         let viewModel = PokemonListViewModelImpl(fetchPokemonPageUseCase: fetchPokemonPageUseCase,
+                                                 filterPokemonListUseCase: filterPokemonListUseCase,
                                                  pokemonItemViewModelFactory: pokemonItemViewModelFactory)
         
         return PokemonListView(viewModel: viewModel)

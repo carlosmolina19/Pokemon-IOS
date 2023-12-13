@@ -26,12 +26,12 @@ final class FetchPokemonPageUseCaseImpl: FetchPokemonPageUseCase {
     // MARK: - Internal Methods
     
     func execute(page: Int) -> AnyPublisher<[PokemonModel], PokemonError> {
-        let pageSize = 10
+        let pageSize = 20
         let start = (page - 1) * pageSize + 1
         let end = start + pageSize - 1
         
         return (start...end).publisher
-            .flatMap(maxPublishers: .max(1)) { number in
+            .flatMap(maxPublishers: .max(5)) { number in
                 self.pokemonDetailUseCase.execute(number: number)
                     .flatMap {
                         self.savePokemonDetailUseCase.execute(model: $0)

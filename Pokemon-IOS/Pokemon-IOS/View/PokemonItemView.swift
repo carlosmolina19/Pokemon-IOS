@@ -1,3 +1,4 @@
+import NukeUI
 import SwiftUI
 
 struct PokemonItemView: View {
@@ -55,7 +56,7 @@ struct PokemonItemView: View {
                         .offset(x: 10, y: 10)
                         .clipped()
                     
-                    AsyncImage(url: viewModel.url) { phase in
+                    LazyImage(url: viewModel.url) { phase in
                         if let image = phase.image {
                             image
                                 .resizable()
