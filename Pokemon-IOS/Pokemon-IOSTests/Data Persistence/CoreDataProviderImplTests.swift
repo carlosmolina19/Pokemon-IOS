@@ -42,22 +42,12 @@ final class CoreDataProviderImplTests: XCTestCase {
     
     // MARK: - Tests
     
-    func test_context_shouldBeEqual() {
-        XCTAssertNotEqual(sut.context.parent, mockPersistentContainer.viewContext)
+    func test_create_shouldReturnNotNil() {
+        XCTAssertNotEqual(sut.create(ofType: Pokemon.self), mockPersistentContainer.viewContext)
     }
     
     func test_fetch_shouldBeFulFill() throws {
-        let asset = try XCTUnwrap(NSDataAsset(name: "PokemonResponse"))
-        let speciesAsset = try XCTUnwrap(NSDataAsset(name: "PokemonSpeciesResponse"))
-        let pokemonResponseDto = try decoder.decode(PokemonResponseDto.self,
-                                                    from: asset.data)
-        
-        let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
-                                                          from: speciesAsset.data)
-        
-        let pokemonModel = PokemonModel(dto: pokemonResponseDto, speciesDto: pokemonSpecieResponseDto)
-        
-        let pokemonEntity = Pokemon(model: pokemonModel, context: sut.context)
+        let pokemonEntity = sut.create(ofType: Pokemon.self)
         let expectation = expectation(description: "test_fetch_shouldBeFulFill")
         let predicate = NSPredicate(format: "id == %@", String(pokemonEntity.id))
         
@@ -72,16 +62,14 @@ final class CoreDataProviderImplTests: XCTestCase {
     }
     
     func test_save_shouldBeFulFill() throws {
-        expectation(forNotification: .NSManagedObjectContextDidSave,
-                    object: sut.context)
-        
+        let expectation = XCTestExpectation(description: "test_save_shouldBeFulFill")
+
         sut.save().sink { _ in
         } receiveValue: { _ in
+            expectation.fulfill()
         }.store(in: &tasks)
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error, "Save did not occur")
-        }
+        wait(for: [expectation])
         tasks.removeAll()
     }
 }

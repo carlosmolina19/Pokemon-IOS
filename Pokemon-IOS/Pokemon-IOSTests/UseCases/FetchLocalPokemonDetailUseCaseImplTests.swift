@@ -45,19 +45,18 @@ final class FetchLocalPokemonDetailUseCaseImplTests: XCTestCase {
     
     // MARK: - Tests
     
-    func test_execute_shouldCallToRepository() throws {
-        let asset = try XCTUnwrap(NSDataAsset(name: "PokemonResponse"))
-        let speciesAsset = try XCTUnwrap(NSDataAsset(name: "PokemonSpeciesResponse"))
-        let pokemonResponseDto = try decoder.decode(PokemonResponseDto.self,
-                                                    from: asset.data)
-        let pokemonSpecieResponseDto = try decoder.decode(PokemonSpeciesResponseDto.self,
-                                                          from: speciesAsset.data)
-        
-        let pokemonModel = PokemonModel(dto: pokemonResponseDto,
-                                       speciesDto: pokemonSpecieResponseDto)
-        
-        let pokemonEntity = Pokemon(model: pokemonModel,
-                context: mockPersistentContainer.viewContext)
+    func test_execute_shouldCallToRepository() {
+        let pokemonEntity = Pokemon(with: mockPersistentContainer.viewContext)
+        let pokemonAbility = PokemonAbility(with: mockPersistentContainer.viewContext)
+        let pokemonType = PokemonType(with: mockPersistentContainer.viewContext)
+
+        pokemonEntity.id = 1
+        pokemonEntity.name = "foo.name"
+        pokemonEntity.url = "www.foo.com"
+        pokemonAbility.name = "foo.ability"
+        pokemonType.name = "foo.type"
+        pokemonEntity.addToAbilities(pokemonAbility)
+        pokemonEntity.addToTypes(pokemonType)
         
         let publisher = Just(pokemonEntity)
             .setFailureType(to: PokemonError.self)
@@ -112,8 +111,7 @@ final class FetchLocalPokemonDetailUseCaseImplTests: XCTestCase {
     }
     
     func test_executeWhenPokemonHasMissingInfo_shouldCallToRepository() throws {
-        
-        let pokemonEntity = Pokemon(context: mockPersistentContainer.viewContext)
+        let pokemonEntity = Pokemon(with: mockPersistentContainer.viewContext)
         
         let publisher = Just(pokemonEntity)
             .setFailureType(to: PokemonError.self)
