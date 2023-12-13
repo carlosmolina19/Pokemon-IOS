@@ -32,30 +32,47 @@ final class LocalPokemonRepositoryImpl: LocalPokemonRepository {
     }
     
     func save(from model: PokemonModel) -> AnyPublisher<Pokemon, PokemonError> {
-        return Future<Pokemon, PokemonError> {[weak self] promise in
-            guard let self
-            else {
-                promise(.failure(PokemonError.deallocated))
-                return
-            }
-            self.localProvider.context.perform {
-                let pokemonEntity = Pokemon(model: model,
-                                context: self.localProvider.context)
+        return self.fetch(number: model.number)
+            .catch { [weak self] _ in
+                guard let self else {
+                    return Fail<Pokemon, PokemonError>(error: PokemonError.deallocated).eraseToAnyPublisher()
+                }
                 
-                self.localProvider.save()
-                    .sink(receiveCompletion: { completion in
-                        switch completion {
-                        case .failure(let error):
-                            promise(.failure(PokemonError.genericError(error)))
-                        case .finished:
-                            break
-                        }
-                    }, receiveValue: {
-                        promise(.success(pokemonEntity))
-                    })
-                    .store(in: &self.cancellables)
+                return self.update(entity: self.localProvider.create(ofType: Pokemon.self),
+                                   with: model)
             }
-        }
-        .eraseToAnyPublisher()
+            .flatMap { entity in
+                self.update(entity: entity,
+                                   with: model)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func update(entity: Pokemon, with model: PokemonModel) -> AnyPublisher<Pokemon, PokemonError> {
+        entity.id = Int16(model.number)
+        entity.name = model.name
+        entity.url = model.url.absoluteString
+        
+        entity.abilities = NSSet(array: model.abilities.map {
+            let ability = self.localProvider.create(ofType: PokemonAbility.self)
+            ability.name = $0.name
+            return ability
+        })
+        
+        entity.types = NSSet(array: model.types.map {
+            let type = self.localProvider.create(ofType: PokemonType.self)
+            type.name = $0.name
+            return type
+        })
+        entity.color = model.color?.name ?? ""
+        
+        return self.localProvider.save()
+            .map { _ in entity }
+            .mapError { error in
+                (error as? PokemonError) ?? .genericError(error)
+            }
+            .eraseToAnyPublisher()
     }
 }

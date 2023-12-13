@@ -5,8 +5,8 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
-        <relationship name="abilities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonAbility" inverseName="pokemons" inverseEntity="PokemonAbility"/>
-        <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PokemonType" inverseName="pokemons" inverseEntity="PokemonType"/>
+        <relationship name="abilities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PokemonAbility" inverseName="pokemon" inverseEntity="PokemonAbility"/>
+        <relationship name="types" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PokemonType" inverseName="pokemon" inverseEntity="PokemonType"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -16,21 +16,11 @@
     <entity name="PokemonAbility" representedClassName="PokemonAbility" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="slot" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="pokemons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="abilities" inverseEntity="Pokemon"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="name"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
+        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="abilities" inverseEntity="Pokemon"/>
     </entity>
     <entity name="PokemonType" representedClassName="PokemonType" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="slot" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="pokemons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="types" inverseEntity="Pokemon"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="name"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
+        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pokemon" inverseName="types" inverseEntity="Pokemon"/>
     </entity>
 </model>

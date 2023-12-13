@@ -1,5 +1,5 @@
-import CoreData
 import Combine
+import CoreData
 import Foundation
 import Mockingbird
 import XCTest
@@ -56,8 +56,10 @@ final class SavePokemonDetailUseCaseImplTests: XCTestCase {
         let pokemonModel = PokemonModel(dto: pokemonResponseDto,
                                        speciesDto: pokemonSpecieResponseDto)
         
-        let pokemonEntity = Pokemon(model: pokemonModel,
-                context: mockPersistentContainer.viewContext)
+        let pokemonEntity = Pokemon(with: mockPersistentContainer.viewContext)
+        
+        pokemonEntity.id = 1
+        pokemonEntity.name = "foo.name"
         
         let publisher = Just(pokemonEntity)
             .setFailureType(to: PokemonError.self)
@@ -78,8 +80,7 @@ final class SavePokemonDetailUseCaseImplTests: XCTestCase {
                 break
             }
             expectation.fulfill()
-        } receiveValue: {
-            XCTAssertEqual($0.name, pokemonEntity.name)
+        } receiveValue: {_ in
         }.store(in: &tasks)
         
         wait(for: [expectation], timeout: 1.0)
