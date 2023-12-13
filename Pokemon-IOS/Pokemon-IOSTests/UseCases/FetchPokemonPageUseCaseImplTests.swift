@@ -78,13 +78,13 @@ final class FetchPokemonPageUseCaseImplTests: XCTestCase {
             }
             expectation.fulfill()
         } receiveValue: {
-            XCTAssertEqual($0.count, 10)
+            XCTAssertEqual($0.count, 20)
         }.store(in: &tasks)
         
         wait(for: [expectation], timeout: 1.0)
-        verify(mockPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(10))
+        verify(mockPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(20))
         verify(mockFetchLocalPokemonDetailUseCase.execute(number: any())).wasNeverCalled()
-        verify(mockSavePokemonDetailUseCase.execute(model: any())).wasCalled(exactly(10))
+        verify(mockSavePokemonDetailUseCase.execute(model: any())).wasCalled(exactly(20))
         tasks.removeAll()
     }
     
@@ -169,12 +169,12 @@ final class FetchPokemonPageUseCaseImplTests: XCTestCase {
             }
             expectation.fulfill()
         } receiveValue: {
-            XCTAssertEqual($0.count, 10)
+            XCTAssertEqual($0.count, 20)
         }.store(in: &tasks)
         
         wait(for: [expectation], timeout: 1.0)
-        verify(mockPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(10))
-        verify(mockFetchLocalPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(10))
+        verify(mockPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(20))
+        verify(mockFetchLocalPokemonDetailUseCase.execute(number: any())).wasCalled(exactly(20))
         verify(mockSavePokemonDetailUseCase.execute(model: any())).wasNeverCalled()
         tasks.removeAll()
     }

@@ -2,6 +2,10 @@ import Foundation
 
 final class PokemonListViewModelPreview: PokemonListViewModel {
     
+    var promptSearch: String {
+        "Search a pokémon"
+    }
+    
     var title: String {
         "Pokédex"
     }
@@ -17,6 +21,9 @@ final class PokemonListViewModelPreview: PokemonListViewModel {
                                          PokemonItemViewModelPreview(),
                                          PokemonItemViewModelPreview(),
                                          PokemonItemViewModelPreview()]
+    
+    @Published var filterText: String = ""
+    @Published var isLoading: Bool = false
     
     // MARK: - Internal Methods
     

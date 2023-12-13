@@ -32,18 +32,18 @@ struct PokemonListView<T: PokemonListViewModel>: View {
                             ForEach(viewModel.items.indices, id: \.self) { index in
                                 PokemonItemView(viewModel: viewModel.items[index])
                                     .onAppear {
-                                        if index == viewModel.items.count - 5 {
+                                        if index == viewModel.items.count - 5 && !viewModel.isLoading {
                                             viewModel.loadItems()
                                         }
                                     }
                             }
                         }
                     }
-                    
+                    .searchable(text: $viewModel.filterText, prompt: viewModel.promptSearch)
                 }
             }
             .padding(.horizontal, 16)
-            .navigationTitle(viewModel.title).font(.title)
+            .navigationTitle(viewModel.title)
             .navigationBarTitleDisplayMode(.large)
         }.onAppear(perform: {
             viewModel.loadItems()

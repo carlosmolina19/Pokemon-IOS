@@ -16,6 +16,7 @@ final class PokemonListViewModelImplTests: XCTestCase {
     private var sut: SUT!
     private var mockFetchPokemonPageUseCase: FetchPokemonPageUseCaseMock!
     private var mockPokemonItemViewModelFactory: PokemonItemViewModelFactoryMock!
+    private var mockFilterPokemonListUseCase: FilterPokemonListUseCaseMock!
     private var mockPokemonItemViewModel: PokemonItemViewModelMock!
     private var decoder: JSONDecoder!
     
@@ -29,8 +30,10 @@ final class PokemonListViewModelImplTests: XCTestCase {
         mockFetchPokemonPageUseCase = mock(FetchPokemonPageUseCase.self)
         mockPokemonItemViewModelFactory = mock(PokemonItemViewModelFactory.self)
         mockPokemonItemViewModel = mock(PokemonItemViewModel.self)
+        mockFilterPokemonListUseCase = mock(FilterPokemonListUseCase.self)
         
         sut = SUT(fetchPokemonPageUseCase: mockFetchPokemonPageUseCase,
+                  filterPokemonListUseCase: mockFilterPokemonListUseCase,
                   pokemonItemViewModelFactory: mockPokemonItemViewModelFactory)
     }
     
@@ -49,6 +52,7 @@ final class PokemonListViewModelImplTests: XCTestCase {
     
     func test_init_shouldReturnValues() throws {
         sut = SUT(fetchPokemonPageUseCase: mockFetchPokemonPageUseCase,
+                  filterPokemonListUseCase: mockFilterPokemonListUseCase,
                   pokemonItemViewModelFactory: mockPokemonItemViewModelFactory)
     
         XCTAssertEqual(sut.items.count, 0)
